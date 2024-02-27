@@ -65,8 +65,8 @@ class UserManager {
         this.users.forEach(user => {
             const userItem = document.createElement("li");
             userItem.innerHTML = `
-                <div>${user.username}</div>
-                <div>Logins: ${user.logins}</div>
+                <div>Username:${user.username}</div>
+                <div>Quantity Logged: ${user.logins}</div>
                 <div>Last Login: ${user.lastLogin}</div>
             `;
             userList.appendChild(userItem);
