@@ -59,20 +59,28 @@ class UserManager {
 
     renderUserList() {
         const userListContainer = document.createElement("div");
-        userListContainer.innerHTML = "<h2>Connected Users</h2>";
-
+        userListContainer.innerHTML = `<h2>Connected Users</h2><ul id="userList"></ul>`;
+    
+        const userList = userListContainer.querySelector("#userList");
+        this.users.forEach(user => {
+            const userItem = document.createElement("li");
+            userItem.innerHTML = `
+                <div>${user.username}</div>
+                <div>Logins: ${user.logins}</div>
+                <div>Last Login: ${user.lastLogin}</div>
+            `;
+            userList.appendChild(userItem);
+        });
+    
         const logoutButton = document.createElement("button");
         logoutButton.textContent = "Logout";
         logoutButton.onclick = () => this.logout();
         userListContainer.appendChild(logoutButton);
-
-        const userElement = document.createElement("div");
-        userElement.textContent = `Username: ${this.currentUser.username} | Logins: ${this.currentUser.logins} | Last Login: ${this.currentUser.lastLogin}`;
-        userListContainer.appendChild(userElement);
-
+    
         document.getElementById("root").innerHTML = "";
         document.getElementById("root").appendChild(userListContainer);
     }
+    
 }
 
 const userManager = new UserManager();
